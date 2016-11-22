@@ -1,11 +1,9 @@
 # Machine Learning Engineer Nanodegree
 ## Capstone Proposal
-Joe Udacity  
-December 31st, 2050
+Sebastian Janisch 
+November 2016
 
 ## Proposal
-_(approx. 2-3 pages)_
-
 ### Domain Background
 _(approx. 1-2 paragraphs)_
 
