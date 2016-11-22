@@ -1,6 +1,7 @@
 # Machine Learning Engineer Nanodegree
 ## Capstone Proposal
 Sebastian Janisch 
+
 November 2016
 
 ## Proposal
