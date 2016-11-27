@@ -6,7 +6,7 @@ November 2016
 
 ## Proposal
 ### Domain Background
-In quantitative asset management any available information that can be quantified is used to uncover potential market opportunities. These opportunities are typically caused by mispricing, where a stock's price is not reflective of its true (intrinsic) value. The _Efficient Market Hypothesis_ suggests that a "market in which prices always 'fully' reflect available information is called 'efficient'" (Fama, Efficient Capital Markets) indicating that in such efficient markets opportunities due to mispricing don't exist. 
+In quantitative asset management any available information that can be quantified is used to uncover potential market opportunities. These opportunities are typically caused by mispricing, where a stock's price is not reflective of its true (intrinsic) value. The _Efficient Market Hypothesis_ (henceforth referred to as EMH) suggests that a "market in which prices always 'fully' reflect available information is called 'efficient'" (Fama, Efficient Capital Markets) indicating that in such efficient markets opportunities due to mispricing don't exist. 
 Empirical analysis suggests however that this theory can, at least in part, be refuted (Sewell, The Efficient Market Hypothesis: Empirical Evidence), opening the playing field for a broad array of quantitative approaches to find said market inefficiencies. 
 
 ### Problem Statement
@@ -15,24 +15,27 @@ The interpreation of a given quantitive metric is however not always so clear (e
 The system proposed in this project sets forward an alternative _model free_ approach using Q-learning, where no statement is made as to the interpretation of a quantitative metric but it is rather left to the system to learn it autonomously.
 
 ### Datasets and Inputs
-_(approx. 2-3 paragraphs)_
+Fortunately in the finance domain quantiative data is readily available and abundant. It is understood that more complete, timely and extensive data can be obtained from vendors at cost, however, for the purpose of this project data readily available and free data sources shall suffice. 
 
-In this section, the dataset(s) and/or input(s) being considered for the project should be thoroughly described, such as how they relate to the problem and why they should be used. Information such as how the dataset or input is (was) obtained, and the characteristics of the dataset or input, should be included with relevant references and citations as necessary It should be clear how the dataset(s) or input(s) will be used in the project and whether their use is appropriate given the context of the problem.
+One of the most crucial information about a traded stock is surely its stock price. As pointed out by Sewell (see above) the _EMH_ can be strongly refuted for daily stock prices, evidence for longer frequencies is thinner though. It is hence that for this project daily asset returns will be used as a primary data input. 
+
+Based on the daily (adjusted, i.e. corrected for stock splits and dividend payments) stock price alone alongside with daily trading volumes a whole field has emerged engaging in the discipline called _Technical Analysis_ (Murphy, Technical Analysis of the Financial Markets). Using metrics that are essentially a function of stock price together with trading volume a whole battery of different  metrics is created that is thought to help find market inefficiencies (e.g. Bollinger Bands). There is much controversy as to whether or not plain technical analysis is truly a strong predictor of future stock prices. Enriching the data set with information other than the stock price alone can add more insight into the details of a company behind a stock and as such yield a more predictive set of information. Fundamental quantitative data derived from financial statements (e.g. P/E ratio, profit margin, etc.) is hence used as a second set of input data into the learning algorithm.
+
+The data source used will be the Quandl API to retrieve stock prices and financial statement data for given stocks.
 
 ### Solution Statement
-_(approx. 1 paragraph)_
+Given the above data source appropriate quantiative metrics will be selected to form the state space for the Q-Learning algorithm. 
 
-In this section, clearly describe a solution to the problem. The solution should be applicable to the project domain and appropriate for the dataset(s) or input(s) given. Additionally, describe the solution thoroughly such that it is clear that the solution is quantifiable (the solution can be expressed in mathematical or logical terms) , measurable (the solution can be measured by some metric and clearly observed), and replicable (the solution can be reproduced and occurs more than once).
+As a universe of stocks there will be a sample of US equities chosen across different industries.
 
-### Benchmark Model
-_(approximately 1-2 paragraphs)_
+Intuitively, financial statement ratios for different classes can be chosen. Popular classes are performance ratios (e.g. profit margin), activity ratios (e.g. asset turnover), financing ratios (e.g. leverage) and liquidity (e.g. interest coverage). Given that these metrics are all percent based they are easily discretized to form a state space.
 
-In this section, provide the details for a benchmark model or result that relates to the domain, problem statement, and intended solution. Ideally, the benchmark model or result contextualizes existing methods or known information in the domain and problem given, which could then be objectively compared to the solution. Describe how the benchmark model or result is measurable (can be measured by some metric and clearly observed) with thorough detail.
+On the side of pure stock price related metrics signals such as momentum, market beta, bollinger band values etc. will be chosen and discretized.
+
+The generated state space will then be explored by randomly iterating over historical examples of stocks for which the above metrics are computed (approach of the Dyna-Q learning algorithm). The reward function will be based on the return generated for a given decision the agent took.
 
 ### Evaluation Metrics
-_(approx. 1-2 paragraphs)_
-
-In this section, propose at least one evaluation metric that can be used to quantify the performance of both the benchmark model and the solution model. The evaluation metric(s) you propose should be appropriate given the context of the data, the problem statement, and the intended solution. Describe how the evaluation metric(s) are derived and provide an example of their mathematical representations (if applicable). Complex evaluation metrics should be clearly defined and quantifiable (can be expressed in mathematical or logical terms).
+To evaluate the performance the actions carried out by the agent will be benchmarked against the return of a representative stock index. Given that the learner for the purpose of this project will be based on US stocks the S&P 500 index will be used as a benchmark. To ensure the return is compared apples to apples a risk adjusted measure will be used to quantify the risk adjusted return of both benchmark index and our stock portfolio (see Sharpe Ratio). 
 
 ### Project Design
 _(approx. 1 page)_
