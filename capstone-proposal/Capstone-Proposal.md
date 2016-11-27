@@ -6,14 +6,13 @@ November 2016
 
 ## Proposal
 ### Domain Background
-_(approx. 1-2 paragraphs)_
-
-In this section, provide brief details on the background information of the domain from which the project is proposed. Historical information relevant to the project should be included. It should be clear how or why a problem in the domain can or should be solved. Related academic research should be appropriately cited in this section, including why that research is relevant. Additionally, a discussion of your personal motivation for investigating a particular problem in the domain is encouraged but not required.
+In quantitative asset management any available information that can be quantified is used to uncover potential market opportunities. These opportunities are typically caused by mispricing, where a stock's price is not reflective of its true (intrinsic) value. The _Efficient Market Hypothesis_ suggests that a "market in which prices always 'fully' reflect available information is called 'efficient'" (Fama, Efficient Capital Markets) indicating that in such efficient markets opportunities due to mispricing don't exist. 
+Empirical analysis suggests however that this theory can, at least in part, be refuted (Sewell, The Efficient Market Hypothesis: Empirical Evidence), opening the playing field for a broad array of quantitative approaches to find said market inefficiencies. 
 
 ### Problem Statement
-_(approx. 1 paragraph)_
-
-In this section, clearly describe the problem that is to be solved. The problem described should be well defined and should have at least one relevant potential solution. Additionally, describe the problem thoroughly such that it is clear that the problem is quantifiable (the problem can be expressed in mathematical or logical terms) , measurable (the problem can be measured by some metric and clearly observed), and replicable (the problem can be reproduced and occurs more than once).
+The assumption of all active asset management is that markets are not always efficient and can be outperformed (i.e. risk adjusted outperformance for given benchmark). This project aims to use model free machine learning techniques to devise an agent based system that generates trading decisions to profit in the stock market. Much of traditonal quantitative asset management uses a model based approach, where investment ideas are casted into a model which generates trading signals (Grinold/Kahn, Active Portfolio Management). This implies that a concrete statement is made as to whether or not a given piece of quantitative information is positive or negative (e.g. high corporate leverage indicates poor financial health and possibility of financial distress).
+The interpreation of a given quantitive metric is however not always so clear (e.g. some industries are characterised by higher leverage without posing a risk of financial distress).
+The system proposed in this project sets forward an alternative _model free_ approach using Q-learning, where no statement is made as to the interpretation of a quantitative metric but it is rather left to the system to learn it autonomously.
 
 ### Datasets and Inputs
 _(approx. 2-3 paragraphs)_
