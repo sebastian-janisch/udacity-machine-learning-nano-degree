@@ -38,16 +38,23 @@ The generated state space will then be explored by randomly iterating over histo
 To evaluate the performance the actions carried out by the agent will be benchmarked against the return of a representative stock index. Given that the learner for the purpose of this project will be based on US stocks the S&P 500 index will be used as a benchmark. To ensure the return is compared apples to apples a risk adjusted measure will be used to quantify the risk adjusted return of both benchmark index and our stock portfolio (see Sharpe Ratio). 
 
 ### Project Design
-_(approx. 1 page)_
+For the implementation of this project the below Python libraries will be used:
 
-In this final section, summarize a theoretical workflow for approaching a solution given the problem. Provide thorough discussion for what strategies you may consider employing, what analysis of the data might be required before being used, or which algorithms will be considered for your implementation. The workflow and discussion that you provide should align with the qualities of the previous sections. Additionally, you are encouraged to include small visualizations, pseudocode, or diagrams to aid in describing the project design, but it is not required. The discussion should clearly outline your intended workflow of the capstone project.
+- Numpy (for numerical operations)
+- Pandas (for tabulating and manipulating data)
+- Quandl (to access the Quandl financial database
+- Seaborn and Matplotlib (for charting)
 
------------
+An abstract Q-learning implementation will be implemented agnostic of the financial domain we operate in (i.e. implement state space, learning function, exploration of states given input data, etc.). This learning implementation will then be used to initially train the agent on historical data without executing actions or simulating any portfolio. Following this learning phase the agent will be executed against historical data, progressing through time. Based on input data the agent will at a given point in time take one of the below actions for a given stock:
 
-**Before submitting your proposal, ask yourself. . .**
+- BUY
+- SELL
+- DO NOTHING (i.e. hold or don't buy)
 
-- Does the proposal you have written follow a well-organized structure similar to that of the project template?
-- Is each section (particularly **Solution Statement** and **Project Design**) written in a clear, concise and specific fashion? Are there any ambiguous terms or phrases that need clarification?
-- Would the intended audience of your project be able to understand your proposal?
-- Have you properly proofread your proposal to assure there are minimal grammatical and spelling mistakes?
-- Are all the resources used for this project correctly cited and referenced?
+Based on these actions a portfolio will be formed and its performance recorded through time. For the time frame of the execution performance measures will be formulated (see sharpe ratio above) and visualised. The important outcomes to determine are:
+
+- the performance of the portfolio against the benchmark
+- the performance through time (does it improve as the agent learns)
+
+For simplicity the agent itself will be run as a basic command line python program which will generate csv based outputs (actions take at given time, etc).
+To then measure performance and visualise results an iPython Notebook seems to be the most suitable tool. It allows to read the produced csv outputs using Python, parse them and produce performance outputs.
