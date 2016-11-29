@@ -99,7 +99,7 @@ More formally, the Q-Learning algorithm is based on a finite Markov Decision Pro
 The state space will be formulated based on the below two premises.
 \begin{enumerate}
 	\item provide sufficiently large value range covered by the state space to discriminate well over different states of the system.
-	\item do not overly bloat up the state space to prevent causing high dimensionality issues (refferred to as the \emph{Curse of Dimensionality}~\cite{rojas2015}).
+	\item do not overly bloat up the state space to prevent causing high dimensionality issues (referred to as the \emph{Curse of Dimensionality}~\cite{rojas2015}).
 \end{enumerate}
 ~\\*
 As a universe of stocks there will be a sample of US equities chosen across different industries.
@@ -112,11 +112,11 @@ The generated state space will then be explored by randomly iterating over histo
 
 \subsection*{Risk Adjusted Returns and the Q Reward Function}
 The reward function will be based on the \textbf{risk adjusted} return generated for a given decision the agent took.
-In active portfolio construction the expected return of a set of assets is maximised under a set of constraints. These constraints are typically (but not restricted to) risk constraints and transaction cost constraints. More formally, the maximisation problem is outlined below (in a simplified form)\cite{grinoldkahn1999}.
+In active portfolio construction there are many techniques being employed. The premise is mostly to maximise the expected return of a set of assets under a set of constraints. These constraints are typically (but not restricted to) risk constraints and transaction cost constraints, which can be expressed with below figure. \cite{grinoldkahn1999}.
 \begin{equation}
-	max~~\alpha - \lambda \cdot \Sigma - TC
+	\alpha_P - \lambda_A \cdot \Psi_P^2 - TC
 \end{equation}
-Here, $\alpha$ represents the return of a portfolio of stocks in excess of its benchmark, $\Sigma$ represents some representation of active risk (i.e. risk in excess of the benchmark), $\lambda$ represents the penalty scalar for taking on active risk and $TC$ represents the transaction costs incurred by the strategy.
+Here, $\alpha$ represents the return of a portfolio of stocks in excess of its benchmark, $\Psi$ represents some representation of active risk (i.e. risk in excess of the benchmark), $\lambda$ represents the penalty scalar for taking on active risk and $TC$ represents the transaction costs incurred by the strategy.
 
 Taking into consideration the transaction costs is understood to be a fundamental corner stone of any trading strategy (especially important when investing in low liquidity assets). Since this project however does not make any claim on presenting a realistic real world implementation of a trading strategy but merely aims to outline a more novel way of utilising machine learning techniques transaction costs will be disregarded.
 \\\\
