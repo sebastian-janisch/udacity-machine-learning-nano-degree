@@ -51,11 +51,11 @@ These opportunities are typically caused by mispricing, where a stock's price is
 The \emph{Efficient Market Hypothesis} (henceforth referred to as \emph{EMH}) suggests that a "market in which prices always 'fully' reflect available information is called 'efficient'"\cite{fama1970} indicating that in such efficient markets opportunities due to mispricing don't exist. 
 Empirical analysis suggests however that this theory can, at least in part, be refuted\cite{sewell2012}, opening the playing field for a broad array of quantitative approaches to find said market inefficiencies.
 
-Theories such as the \emph{EMH} and \emph{Random Walk Hypothesis}\cite{cootner1964} call into question the right of existence for active portfolio management (the discipline that seeks to outperform against a chosen benchmark by uncovering market inefficiencies). Whilst the jury on the matter is still out there is an understanding that said market inefficiencies are difficult to expose\cite{grinoldkahn1999}. Finding yet another clever way of generating alpha (i.e. return greater than that of the market benchmark) is the problem that quantitative active portfolio management tries to solve.
+Theories such as the \emph{EMH} and the \emph{Random Walk Hypothesis}\cite{cootner1964} call into question the right of existence for active portfolio management (the discipline that seeks to outperform against a chosen benchmark by uncovering market inefficiencies). Whilst the jury on the matter is still out there is an understanding that said market inefficiencies are difficult to expose\cite{grinoldkahn1999}. Finding yet another clever way of generating alpha (i.e. return greater than that of the market benchmark) is the problem that quantitative active portfolio management tries to solve.
 
 
 \section{Problem Statement}
-The assumption of all active asset management is that markets are not always efficient and can be outperformed (i.e. risk adjusted outperformance for given benchmark). Much of traditonal quantitative asset management uses a model based approach, where investment ideas are casted into a model which generates trading signals\cite{grinoldkahn1999}. This implies that a concrete statement is made as to whether or not a given piece of quantitative information is positive or negative (e.g. high corporate leverage indicates poor financial health and possibility of financial distress). The interpreation of a given quantitive metric is however not always so clear (e.g. some industries are characterised by higher leverage without posing a risk of financial distress). The system proposed in this project sets forward an alternative model-free reinforcement learning technique approach using Q-Learning, where no statement is made as to the interpretation of a quantitative metric but it is rather left to the system to learn it autonomously.
+The assumption of all active asset management is that markets are not always efficient and can be outperformed (i.e. risk adjusted outperformance for given benchmark). Much of traditonal quantitative asset management uses a model based approach, where investment ideas are cast into a model which generates trading signals\cite{grinoldkahn1999}. This implies that a concrete statement is made as to whether or not a given piece of quantitative information is positive or negative (e.g. high corporate leverage indicates poor financial health and possibility of financial distress). The interpreation of a given quantitive metric is however not always so clear (e.g. some industries are characterised by higher leverage without posing a risk of financial distress). The system proposed in this project sets forward an alternative model-free reinforcement learning technique approach using Q-Learning, where no statement is made as to the interpretation of a quantitative metric but it is rather left to the system to learn it autonomously.
 
 \section{Datasets and Inputs}
 Fortunately in the finance domain quantiative data is readily available and abundant. It is understood that more complete, timely and extensive data can be obtained from vendors at cost, however, for the purpose of this project data readily available and free data sources shall suffice.
@@ -112,7 +112,7 @@ The generated state space will then be explored by randomly iterating over histo
 
 \subsection*{Risk Adjusted Returns and the Q Reward Function}
 The reward function will be based on the \textbf{risk adjusted} return generated for a given decision the agent took.
-In active portfolio construction the expected return of a set of assets is maximised under a set of constraints. These constraints are typically (but not restricted to) risk constraints and transaction cost constraint. More formally, the maximisation problem is outlined below (in a simplified form)\cite{grinoldkahn1999}.
+In active portfolio construction the expected return of a set of assets is maximised under a set of constraints. These constraints are typically (but not restricted to) risk constraints and transaction cost constraints. More formally, the maximisation problem is outlined below (in a simplified form)\cite{grinoldkahn1999}.
 \begin{equation}
 	max~~\alpha - \lambda \cdot \Sigma - TC
 \end{equation}
@@ -148,7 +148,7 @@ For the implementation of this project the below Python libraries will be used:
 \begin{itemize}
 	\item Numpy (for numerical operations)
 	\item Pandas (for tabulating and manipulating data)
-	\item Quandl (to access the Quandl financial database
+	\item Quandl (to access the Quandl financial database)
 	\item Seaborn and Matplotlib (for charting)
 \end{itemize}
 ~\\
