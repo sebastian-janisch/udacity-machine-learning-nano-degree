@@ -115,13 +115,14 @@ The reward function will be based on the \textbf{risk adjusted} return generated
 In active portfolio construction there are many techniques being employed. The premise is mostly to maximise the expected return of a set of assets under a set of constraints. These constraints are typically (but not restricted to) risk constraints and transaction cost constraints, which can be expressed with below figure. \cite{grinoldkahn1999}.
 \begin{equation}
 	\alpha_P - \lambda_A \cdot \Psi_P^2 - TC
+	\label{eq:max}
 \end{equation}
 Here, $\alpha$ represents the return of a portfolio of stocks in excess of its benchmark, $\Psi$ represents some representation of active risk (i.e. risk in excess of the benchmark), $\lambda$ represents the penalty scalar for taking on active risk and $TC$ represents the transaction costs incurred by the strategy.
 
 Taking into consideration the transaction costs is understood to be a fundamental corner stone of any trading strategy (especially important when investing in low liquidity assets). Since this project however does not make any claim on presenting a realistic real world implementation of a trading strategy but merely aims to outline a more novel way of utilising machine learning techniques transaction costs will be disregarded.
 \\\\
 The point to make is that it is easy to achieve high returns by taking excessive active risk. Devising a reward function that is based on pure return would incentivise the Q-Learning algorithm to take risky bets, a behaviour we want to control. 
-By correcting for risk in the reward function we can achieve a similar effect compared to the one outlined in above maximisation problem.
+By correcting for risk in the reward function we can achieve a similar effect compared to the characeristics of formula \ref{eq:max}.
 \\\\
 A suitable candidate for a reward function is the \emph{Sharpe Ratio}, the industry standard for calculating risk adjusted return. More formally, the \emph{Sharpe Ratio} is outlined below.
 \begin{equation}
