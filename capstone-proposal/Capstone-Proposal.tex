@@ -52,7 +52,8 @@ The \emph{Efficient Market Hypothesis} (henceforth referred to as \emph{EMH}) su
 Empirical analysis suggests however that this theory can, at least in part, be refuted\cite{sewell2012}, opening the playing field for a broad array of quantitative approaches to find said market inefficiencies.
 
 Theories such as the \emph{EMH} and the \emph{Random Walk Hypothesis}\cite{cootner1964} call into question the right of existence for active portfolio management (the discipline that seeks to outperform against a chosen benchmark by uncovering market inefficiencies). Whilst the jury on the matter is still out there is an understanding that said market inefficiencies are difficult to expose\cite{grinoldkahn1999}. Finding yet another clever way of generating alpha (i.e. return greater than that of the market benchmark) is the problem that quantitative active portfolio management tries to solve.
-
+\\\\
+Much has happened in the machine learning space in recent years. As a discipline, machine learning techniques lend themselves well to problems such as finding trading strategies that outperform the market. 
 
 \section{Problem Statement}
 The assumption of all active asset management is that markets are not always efficient and can be outperformed (i.e. risk adjusted outperformance for given benchmark). Much of traditonal quantitative asset management uses a model based approach, where investment ideas are cast into a model which generates trading signals\cite{grinoldkahn1999}. This implies that a concrete statement is made as to whether or not a given piece of quantitative information is positive or negative (e.g. high corporate leverage indicates poor financial health and possibility of financial distress). The interpreation of a given quantitive metric is however not always so clear (e.g. some industries are characterised by higher leverage without posing a risk of financial distress). The system proposed in this project sets forward an alternative model-free reinforcement learning technique approach using Q-Learning, where no statement is made as to the interpretation of a quantitative metric but it is rather left to the system to learn it autonomously.
@@ -132,6 +133,13 @@ Here $r_i$ is the return of asset $i$, $r_f$ is the risk free rate and $\sigma_i
 
 \section{Benchmark Model}
 To evaluate the performance of the actions carried out by the agent will be benchmarked against the return of a representative stock index. Given that the learner for the purpose of this project will be based on US stocks the S\&P 500 index will be used as a benchmark.
+\\\\
+As return figures of active portfolio and benchmark the cumulative return will be used. If we start measuring performance starting at time $t = 0$ and ending at time $t=T$ then we compute the cumulative return for any given portfolio as below.
+\begin{equation}
+	R_c = \frac{P_T - P_0}{P_0}
+\end{equation}
+~\\
+Here $P$ is the price at time $t$ (or current value) of the portfolio we are looking at (i.e. benchmark or active portfolio).
 
 \section{Evaluation Metrics}
 To ensure the outcome of the learner is compared apples to apples a risk adjusted measure will be used to quantify the risk adjusted return of both benchmark index and our stock portfolio. The \emph{Sharpe Ratio} (see above) will be used as the first metric. Additionally, a metric commonly used in active investment is the \emph{Information Ratio} which measures how much  \textbf{active} return is generated per unit of \textbf{active} risk (both compared to the benchmark), compared to the \emph{Sharpe Ratio} which compares against the risk free rate and pure standard deviation. 
@@ -139,6 +147,8 @@ To ensure the outcome of the learner is compared apples to apples a risk adjuste
 	IR = \frac{R_P - R_B}{\sigma_{R_P - R_B}}
 \end{equation}
 ~\\\\
+Here, $R_P$ is the return of the active portfolio, $R_B$ is the return of the chosen benchmark and $\sigma_{R_P - R_B}$ is the \textbf{active} risk.
+\\\\
 Using both evaluation metrics will give a good handle on overall risk adjusted return and also excess return with respect to excess risk taken on.
 \\\\
 As mentioned above, it is understood that a more realistic system would incorporate transaction costs into the evaluation. For simplicity however this project disregards transaction costs.
