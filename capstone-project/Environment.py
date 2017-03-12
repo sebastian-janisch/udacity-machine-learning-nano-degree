@@ -2,10 +2,22 @@ import pandas as pd
 from scipy.stats.mstats import zscore
 
 class Environment:
+    """ The environment holds the current date and allows to sense the
+        state for given date as well as advance to the next date.
+    """
 
-    def __init__(self, data):
+    def __init__(self, data, items):
+        """ Initialises the environment with the underlying data panel and
+            the data items to form the state space over.
+
+            Arguments:
+            data -- a panel where items are data items (e.g. LEVERAGE_ART, or PRICE),
+                    major axis are dates and minor axis are tickers.
+            items -- the items to form the state space over
+        """
         self.__data = data
-        self.__dates = list(data.get("LEVERAGE").index)
+        self.__dates = list(data.get(items[0]).index)
+        self.__items = items
         self.__current_date_index = -1
 
     def advance(self):
@@ -31,18 +43,19 @@ class Environment:
 
     def sense_date(self, date):
         bins = 3
-        tickers = self.__data.get("LEVERAGE").columns
+        tickers = self.__data.get(self.__items[0]).columns
 
-        environment = pd.DataFrame(index=["LEVERAGE"], columns=tickers)
+        environment = pd.DataFrame(index=[self.__items[0]], columns=tickers)
 
-        # Leverage ratio
-        leverage = self.__data.get("LEVERAGE").ix[date].copy()
-        leverage[:] = pd.cut(zscore(leverage), bins=bins, labels=range(bins))
-        environment.ix["LEVERAGE"] = leverage
+        # create zscores for each item
+        for item in self.__items:
+            try:
+                item_data = self.__data.get(item).ix[date].copy()
+                item_data[:] = pd.cut(zscore(item_data), bins=bins, labels=range(bins))
+                environment.ix[item] = item_data
+            except ValueError:
+                print("Could not compute zscore for {}".format(item))
+                raise
 
-        # Profit margin
-        profit_margin = self.__data.get("NET_PROFIT_MARGIN").ix[date].copy()
-        profit_margin[:] = pd.cut(zscore(profit_margin), bins=bins, labels=range(bins))
-        environment.ix["NET_PROFIT_MARGIN"] = profit_margin
 
         return environment

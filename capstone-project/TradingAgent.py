@@ -1,17 +1,32 @@
 import pandas as pd
 import portfolioopt as pfopt
+from Environment import Environment
+from learn import QLearner
+from finance import InvestmentPortfolio
+import random
 
 class TradingAgent:
 
-    def __init__(self, data):
-        self.__actions = ["BUY", "SELL"]
-        self.__state_variables = ["LEVERAGE", "NET_PROFIT_MARGIN"]
+    def __init__(self, data, price_item, items, alpha, random=False):
+        """ Initialises the trading agent with its data and items to trade upon.
 
-        self.__environment = Environment(data)
-        self.__learner = QLearner(self.__environment, self.__actions, self.__state_variables)
-        self.__prices = pd.DataFrame(data.get("PRICE"))
+            Arguments:
+            data -- a panel where items are data items (e.g. LEVERAGE_ART, or PRICE),
+                    major axis are dates and minor axis are tickers
+            price_item -- a string that represents the name of the stock price item
+            items -- the items to form the state space over
+            alpha -- the learning rate for the q learner
+            random -- will trade randomly if True
+        """
+        self.__actions = ["BUY", "SELL"]
+        self.__state_variables = items
+
+        self.__environment = Environment(data, items)
+        self.__learner = QLearner(self.__environment, self.__actions, self.__state_variables, alpha=alpha)
+        self.__prices = pd.DataFrame(data.get(price_item))
         self.__returns = (self.__prices / self.__prices.shift(1) - 1)[1:]
         self.__portfolio = InvestmentPortfolio()
+        self.__random = random
 
     def get_environment(self):
         return self.__environment
@@ -55,6 +70,9 @@ class TradingAgent:
             log -- a list if log messages should be added or None if not needed
         """
 
+        if self.__random:
+            self.learn(255, reward_offset)
+
         actions_taken = dict()
 
         i = 0
@@ -63,6 +81,9 @@ class TradingAgent:
             state = self.__environment.sense()
 
             actions = pd.Series(self.__learner.get_actions())
+            if self.__random:
+                actions = actions.apply(lambda x: random.choice(self.__actions))
+
             actions_taken[current_date] = pd.Series(actions)
 
             if i <= reward_offset or i % reward_offset != 0:
