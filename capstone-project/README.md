@@ -1,5 +1,5 @@
 # A Model-Free Reinforcement Learning Trading Agent
-# Udacity Machine Learning Nano Degree Capstone Project
+## Udacity Machine Learning Nano Degree Capstone Project
 
 Sebastian Janisch
 
