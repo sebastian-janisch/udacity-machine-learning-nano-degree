@@ -1,3 +1,8 @@
+# A Model-Free Reinforcement Learning Trading Agent
+# Udacity Machine Learning Nano Degree Capstone Project
+
+Sebastian Janisch
+
 This README outlines how to use the code for the capstone project.
 
 1. This project utilises the below external libraries:
