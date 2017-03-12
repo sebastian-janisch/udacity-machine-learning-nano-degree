@@ -33,5 +33,7 @@ This README outlines how to use the code for the capstone project.
 	- TradingAgent: the agent that utilises the QLearner, Environment and InvestmentPortfolio 
 	  classes to drive the system.
 	  
-3. There is no main method for this code. Rather, the code is utilised and explained/charted 
+3. The input data utilised in this project is contained in the 'data.tar.gz' file.
+	  
+4. There is no main method for this code. Rather, the code is utilised and explained/charted 
    using an IPython Notebook which is attached to this submission.
